@@ -2,6 +2,8 @@
 {{- /*     Insert any custom code (web-analytics, resources, etc.) - it will appear in the <head></head> section of every page. */ -}}
 {{- /*     Can be overwritten by partial with the same name in the global layouts. */ -}}
 
-<link rel="stylesheet" href="{{ "css/extended/fonts.css" | relURL }}">
+{{- $fonts := resources.Get "css/extended/fonts.css" }}
+{{- $fonts = $fonts | resources.Minify | resources.Fingerprint "sha512" }}
+<link rel="stylesheet" href="{{ $fonts.RelPermalink }}" integrity="{{ $fonts.Data.Integrity }}" crossorigin="anonymous">
 
 {{- /* Head custom content area end */ -}}
